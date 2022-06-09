@@ -1,5 +1,12 @@
 {
   "AppSyncApiName": "amplifoto",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-06-09T17:47:01.667Z",
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authamplifotobad07cdc",
+      "Outputs.UserPoolId"
+    ]
+  }
 }
