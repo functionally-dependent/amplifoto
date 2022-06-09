@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { HashRouter, Route, Routes } from "react-router-dom";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import { API, Storage, Auth } from "aws-amplify";
-import { listPosts } from "./graphql/queries";
-import { css } from "@emotion/css";
 import "@aws-amplify/ui-react/styles.css";
-
-import Posts from "./Posts";
-import Post from "./Post";
-import Header from "./Header";
-import CreatePost from "./CreatePost";
+import { css } from "@emotion/css";
+import Amplify, { Auth, DataStore, Storage, syncExpression } from "aws-amplify";
+import React, { useEffect, useState } from "react";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import Button from "./Button";
+import CreatePost from "./CreatePost";
+import Header from "./Header";
+import { Post, PostStatus } from "./models";
+import Posts from "./Posts";
+import SinglePost from "./SinglePost";
+
+DataStore.configure({
+  syncExpressions: [
+    syncExpression(Post, () => {
+      return (post) => post.status("eq", PostStatus.ACTIVE);
+    }),
+  ],
+});
 
 function App() {
   /* create a couple of pieces of initial state */
@@ -21,25 +28,33 @@ function App() {
   /* fetch posts when component loads */
   useEffect(() => {
     async function fetchPosts() {
-      /* query the API, ask for 100 items */
-      let postData = await API.graphql({
-        query: listPosts,
-        variables: { limit: 100 },
+      /* check if user is logged in */
+      let user = await Auth.currentAuthenticatedUser();
+      Amplify.configure({
+        aws_appsync_authenticationType:
+          user != null ? "AMAZON_COGNITO_USER_POOLS" : "API_KEY",
       });
-      let postsArray = postData.data.listPosts.items;
+
+      /* query the API, ask for 100 items */
+      let postData = await DataStore.query(Post);
+      console.log("POST DATA FROM LOCAL: ");
+      console.log(postData);
+      let postsArray = postData;
       /* map over the image keys in the posts array, get signed image URLs for each image */
       postsArray = await Promise.all(
         postsArray.map(async (post) => {
-          if (post.image != null) {
-            const imageKey = await Storage.get(post.image);
-            post.image = imageKey;
+          let copyPost = { ...post };
+          if (copyPost.image != null) {
+            const imageKey = await Storage.get(copyPost.image);
+            copyPost.image = imageKey;
           }
-          return post;
+          return copyPost;
         })
       );
       /* update the posts array in the local state */
       setPostState(postsArray);
     }
+
     fetchPosts();
   }, []);
 
@@ -49,6 +64,7 @@ function App() {
     updateMyPosts(myPostData);
     updatePosts(postsArray);
   }
+
   return (
     <>
       <HashRouter>
@@ -61,7 +77,7 @@ function App() {
           />
           <Routes>
             <Route exact path="/" element={<Posts posts={posts} />} />
-            <Route path="/post/:id" element={<Post />} />
+            <Route path="/post/:id" element={<SinglePost />} />
             <Route exact path="/myposts" element={<Posts posts={myPosts} />} />
           </Routes>
         </div>
