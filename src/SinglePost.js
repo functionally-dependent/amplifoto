@@ -1,8 +1,16 @@
-import React, { useState, useEffect } from "react";
 import { css } from "@emotion/css";
+import { DataStore, Storage, syncExpression } from "aws-amplify";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { API, Storage } from "aws-amplify";
-import { getPost } from "./graphql/queries";
+import { Post, PostStatus } from "./models";
+
+DataStore.configure({
+  syncExpressions: [
+    syncExpression(Post, () => {
+      return (post) => post.status("eq", PostStatus.ACTIVE);
+    }),
+  ],
+});
 
 export default function SinglePost() {
   const [loading, updateLoading] = useState(true);
@@ -11,20 +19,20 @@ export default function SinglePost() {
   useEffect(() => {
     async function fetchPost() {
       try {
-        const postData = await API.graphql({
-          query: getPost,
-          variables: { id },
-        });
-        const currentPost = postData.data.getPost;
+        const currentPost = await DataStore.query(Post, id);
         const image = await Storage.get(currentPost.image);
-
-        currentPost.image = image;
-        updatePost(currentPost);
+        updatePost({
+          name: currentPost.name,
+          description: currentPost.description,
+          image: image,
+          location: currentPost.location,
+        });
         updateLoading(false);
       } catch (err) {
         console.log("error: ", err);
       }
     }
+
     fetchPost();
   }, [id]);
 
