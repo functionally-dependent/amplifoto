@@ -1,8 +1,9 @@
 import React from "react";
 import { css } from "@emotion/css";
 import { Link } from "react-router-dom";
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
-export default function Header({ isPassedToWithAuthenticator, signOut, user }) {
+function Header({ signOut }) {
   return (
     <div className={headerContainer}>
       <h1 className={headerStyle}>Amplifoto</h1>
@@ -46,3 +47,5 @@ const signoutStyle = css`
   width: 100px;
   max-with: 20vw;
 `;
+
+export default withAuthenticator(Header);
