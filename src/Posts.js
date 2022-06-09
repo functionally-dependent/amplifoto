@@ -12,7 +12,10 @@ export default function Posts({ posts = [] }) {
           <div key={post.id} className={postContainer}>
             <div className={ownerContainer}>
               <div className={avatarPlaceholder}>
-                <img src={`https:/eu.ui-avatars.com/api/?name=${post.owner}`} />
+                <img
+                  alt="avatar"
+                  src={`https:/eu.ui-avatars.com/api/?name=${post.owner}`}
+                />
               </div>{" "}
               <h2>{post.owner}</h2>
             </div>

@@ -9,31 +9,35 @@ export default function Post() {
   const [post, updatePost] = useState(null);
   const { id } = useParams();
   useEffect(() => {
-    fetchPost();
-  }, []);
-  async function fetchPost() {
-    try {
-      const postData = await API.graphql({
-        query: getPost,
-        variables: { id },
-      });
-      const currentPost = postData.data.getPost;
-      const image = await Storage.get(currentPost.image);
+    async function fetchPost() {
+      try {
+        const postData = await API.graphql({
+          query: getPost,
+          variables: { id },
+        });
+        const currentPost = postData.data.getPost;
+        const image = await Storage.get(currentPost.image);
 
-      currentPost.image = image;
-      updatePost(currentPost);
-      updateLoading(false);
-    } catch (err) {
-      console.log("error: ", err);
+        currentPost.image = image;
+        updatePost(currentPost);
+        updateLoading(false);
+      } catch (err) {
+        console.log("error: ", err);
+      }
     }
-  }
+    fetchPost();
+  }, [id]);
+
   if (loading) return <h3>Loading...</h3>;
   console.log("post: ", post);
   return (
     <div className={postContainer}>
       <div className={ownerContainer}>
         <div className={avatarPlaceholder}>
-          <img src={`https:/eu.ui-avatars.com/api/?name=${post.owner}`} />
+          <img
+            alt="avatar"
+            src={`https:/eu.ui-avatars.com/api/?name=${post.owner}`}
+          />
         </div>
         <h2>{post.owner}</h2>
         <h4>{post.location}</h4>
