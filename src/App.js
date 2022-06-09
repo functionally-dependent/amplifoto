@@ -56,6 +56,12 @@ function App() {
     }
 
     fetchPosts();
+
+    const subscription = DataStore.observe(Post).subscribe((msg) => {
+      console.log(msg.model, msg.opType, msg.element);
+      fetchPosts();
+    });
+    return () => subscription.unsubscribe();
   }, []);
 
   async function setPostState(postsArray) {
