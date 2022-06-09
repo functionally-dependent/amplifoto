@@ -20,8 +20,9 @@ export default function Posts({ posts = [] }) {
               <h2>{post.owner}</h2>
             </div>
             <h3 className={postTitleStyle}>{post.name}</h3>
+            <p>{post.description}</p>
             {post.image != null ? (
-              <img alt="post" className={imageStyle} src="{post.image}" />
+              <img alt="post" className={imageStyle} src={post.image} />
             ) : (
               <CustomPlaceholder
                 width={400}
