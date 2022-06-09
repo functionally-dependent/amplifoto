@@ -44,7 +44,7 @@ export default function Post() {
       </div>
       <h3 className={postTitleStyle}>{post.name}</h3>
       <p>{post.description}</p>
-      <img alt="post" src="{post.image}" className={imageStyle} />
+      <img alt="post" src={post.image} className={imageStyle} />
     </div>
   );
 }

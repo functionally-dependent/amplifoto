@@ -61,7 +61,7 @@ function App() {
           />
           <Routes>
             <Route exact path="/" element={<Posts posts={posts} />} />
-            <Route path="/post/\:id" element={<Post />} />
+            <Route path="/post/:id" element={<Post />} />
             <Route exact path="/myposts" element={<Posts posts={myPosts} />} />
           </Routes>
         </div>
