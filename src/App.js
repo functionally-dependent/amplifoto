@@ -6,6 +6,7 @@ import { API } from "aws-amplify";
 import { listPosts } from "./graphql/queries";
 // import Auth
 import { withAuthenticator } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
 
 function App() {
   const [posts, setPosts] = useState([]);
