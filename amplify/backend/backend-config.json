@@ -66,5 +66,13 @@
       "providerPlugin": "awscloudformation",
       "dependsOn": []
     }
+  },
+  "predictions": {
+    "identifyLabelsbc3cfee1": {
+      "providerPlugin": "awscloudformation",
+      "service": "Rekognition",
+      "dependsOn": [],
+      "identifyType": "identifyLabels"
+    }
   }
 }
