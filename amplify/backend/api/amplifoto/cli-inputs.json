@@ -10,7 +10,11 @@
       "apiKeyExpirationDate": "2022-06-16T17:46:49.522Z",
       "keyDescription": "public"
     },
-    "conflictResolution": {},
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "AUTOMERGE"
+      }
+    },
     "additionalAuthTypes": [
       {
         "mode": "AMAZON_COGNITO_USER_POOLS",

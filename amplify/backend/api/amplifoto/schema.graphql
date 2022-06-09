@@ -3,6 +3,11 @@
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
+enum PostStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
 type Post
   @model
   @auth(
@@ -18,4 +23,5 @@ type Post
   description: String!
   image: String
   owner: String
+  status: PostStatus
 }

@@ -1,7 +1,8 @@
-import React from "react";
-import { css } from "@emotion/css";
-import { Link } from "react-router-dom";
 import { withAuthenticator } from "@aws-amplify/ui-react";
+import { css } from "@emotion/css";
+import React from "react";
+import { Link } from "react-router-dom";
+import Button from "./Button";
 
 function Header({ signOut }) {
   return (
@@ -13,9 +14,7 @@ function Header({ signOut }) {
       <Link to="/myposts" className={linkStyle}>
         My Posts
       </Link>
-      <button onClick={signOut} className={signoutStyle}>
-        Sign out
-      </button>
+      <Button onClick={signOut} title="Sign out" />
     </div>
   );
 }
@@ -43,11 +42,13 @@ const linkStyle = css`
   }
 `;
 
+/*
 const signoutStyle = css`
   display: inline-block;
   margin-left: 10vw;
   width: 100px;
   max-with: 20vw;
 `;
+*/
 
 export default withAuthenticator(Header);

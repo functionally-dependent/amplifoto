@@ -13,8 +13,12 @@ export const createPost = /* GraphQL */ `
       description
       image
       owner
+      status
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -30,8 +34,12 @@ export const updatePost = /* GraphQL */ `
       description
       image
       owner
+      status
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
@@ -47,8 +55,12 @@ export const deletePost = /* GraphQL */ `
       description
       image
       owner
+      status
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
