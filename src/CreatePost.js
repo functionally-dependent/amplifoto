@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { css } from "@emotion/css";
-import Button from "./Button";
-import { v4 as uuid } from "uuid";
-import Amplify, { Storage, API, Auth, Predictions } from "aws-amplify";
 import { AmazonAIPredictionsProvider } from "@aws-amplify/predictions";
-import { createPost } from "./graphql/mutations";
+import { css } from "@emotion/css";
+import Amplify, { Auth, DataStore, Predictions, Storage } from "aws-amplify";
+import React, { useState } from "react";
+import { v4 as uuid } from "uuid";
+import Button from "./Button";
+import { Post } from "./models";
 
 Amplify.addPluggable(new AmazonAIPredictionsProvider());
 
@@ -68,8 +68,7 @@ export default function CreatePost({
           type: "ALL",
         },
       });
-      console.log("predicted: ");
-      console.log(predicted);
+      console.log("predicted: ", predicted);
       let predictedLabel = " ";
       for (let label of predicted.labels) {
         console.log(label);
@@ -80,21 +79,18 @@ export default function CreatePost({
       /* --- end PREDICTIONS --- */
       const postId = uuid();
       const postDescription = description + predictedLabel;
+      const { username } = await Auth.currentAuthenticatedUser();
       const postInfo = {
         name,
         description: postDescription,
         location,
         image: formState.image.name,
         id: postId,
+        owner: username,
       };
-      console.log("post info is");
-      console.log(postInfo);
-      await API.graphql({
-        query: createPost,
-        variables: { input: postInfo },
-        authMode: "AMAZON_COGNITO_USER_POOLS",
-      });
-      const { username } = await Auth.currentAuthenticatedUser();
+      console.log("postInfo: ", postInfo);
+      let savedPost = await DataStore.save(new Post(postInfo));
+      console.log("savedPost: ", savedPost);
       updatePosts([
         ...posts,
         { ...postInfo, image: formState.file, owner: username },
