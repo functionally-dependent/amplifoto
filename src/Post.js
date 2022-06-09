@@ -49,6 +49,7 @@ export default function Post() {
   );
 }
 
+/*
 const titleStyle = css`
   margin-bottom: 7px;
 `;
@@ -57,6 +58,7 @@ const locationStyle = css`
   color: #0070f3;
   margin: 0;
 `;
+*/
 
 const imageStyle = css`
   max-width: 500px;
