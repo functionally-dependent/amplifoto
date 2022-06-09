@@ -128,11 +128,7 @@ export default function CreatePost({
       />
       <input type="file" onChange={onChangeFile} />
       {formState.file && (
-        <img
-          className={imageStyle}
-          alt="preview"
-          src="/static/lab2-storage-predictions/{formState.file}"
-        />
+        <img className={imageStyle} alt="preview" src={formState.file} />
       )}
       <Button title="Create New Post" onClick={save} />
       <Button
