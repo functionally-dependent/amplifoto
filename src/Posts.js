@@ -12,17 +12,13 @@ export default function Posts({ posts = [] }) {
           <div key={post.id} className={postContainer}>
             <div className={ownerContainer}>
               <div className={avatarPlaceholder}>
-                <img src="/static/lab2-storage-predictions/{`https:/eu.ui-avatars.com/api/?name=${post.owner}`}" />
+                <img src={`https:/eu.ui-avatars.com/api/?name=${post.owner}`} />
               </div>{" "}
               <h2>{post.owner}</h2>
             </div>
             <h3 className={postTitleStyle}>{post.name}</h3>
             {post.image != null ? (
-              <img
-                alt="post"
-                className={imageStyle}
-                src="/static/lab2-storage-predictions/{post.image}"
-              />
+              <img alt="post" className={imageStyle} src="{post.image}" />
             ) : (
               <CustomPlaceholder
                 width={400}

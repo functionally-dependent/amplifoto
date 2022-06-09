@@ -13,7 +13,9 @@ function Header({ signOut }) {
       <Link to="/myposts" className={linkStyle}>
         My Posts
       </Link>
-      <button onClick={signOut}>Sign out</button>
+      <button onClick={signOut} className={signoutStyle}>
+        Sign out
+      </button>
     </div>
   );
 }

@@ -33,18 +33,14 @@ export default function Post() {
     <div className={postContainer}>
       <div className={ownerContainer}>
         <div className={avatarPlaceholder}>
-          <img src="/static/lab2-storage-predictions/{`https:/eu.ui-avatars.com/api/?name=${post.owner}`}" />
+          <img src={`https:/eu.ui-avatars.com/api/?name=${post.owner}`} />
         </div>
         <h2>{post.owner}</h2>
         <h4>{post.location}</h4>
       </div>
       <h3 className={postTitleStyle}>{post.name}</h3>
       <p>{post.description}</p>
-      <img
-        alt="post"
-        src="/static/lab2-storage-predictions/{post.image}"
-        className={imageStyle}
-      />
+      <img alt="post" src="{post.image}" className={imageStyle} />
     </div>
   );
 }
