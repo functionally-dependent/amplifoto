@@ -1,15 +1,17 @@
+import "./App.css";
 import React, { useState, useEffect } from "react";
 // import API from Amplify library
 import { API } from "aws-amplify";
 // import query definition
 import { listPosts } from "./graphql/queries";
+// import Auth
+import { withAuthenticator } from "@aws-amplify/ui-react";
 
-export default function App() {
+function App() {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     fetchPosts();
   }, []);
-
   async function fetchPosts() {
     try {
       const postData = await API.graphql({ query: listPosts });
@@ -30,3 +32,5 @@ export default function App() {
     </div>
   );
 }
+
+export default withAuthenticator(App);

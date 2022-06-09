@@ -10,6 +10,11 @@
       "StackName": "amplify-amplifoto-dev-174035",
       "StackId": "arn:aws:cloudformation:ap-southeast-1:352098214781:stack/amplify-amplifoto-dev-174035/3870ee00-e7d8-11ec-8bd3-0a6e5c8957fe",
       "AmplifyAppId": "dfakp3gnd12g6"
+    },
+    "categories": {
+      "auth": {
+        "amplifotobad07cdc": {}
+      }
     }
   }
 }
