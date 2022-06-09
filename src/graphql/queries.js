@@ -10,6 +10,7 @@ export const getPost = /* GraphQL */ `
       description
       image
       owner
+      status
       createdAt
       updatedAt
       _version
@@ -32,6 +33,7 @@ export const listPosts = /* GraphQL */ `
         description
         image
         owner
+        status
         createdAt
         updatedAt
         _version
@@ -63,6 +65,7 @@ export const syncPosts = /* GraphQL */ `
         description
         image
         owner
+        status
         createdAt
         updatedAt
         _version

@@ -45,6 +45,15 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": {
+                        "enum": "PostStatus"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -103,7 +112,16 @@ export const schema = {
             ]
         }
     },
-    "enums": {},
+    "enums": {
+        "PostStatus": {
+            "name": "PostStatus",
+            "values": [
+                "ACTIVE",
+                "INACTIVE",
+                "SUSPENDED"
+            ]
+        }
+    },
     "nonModels": {},
-    "version": "848b8e7d89b6724a838533836f457732"
+    "version": "f16641bf886d9d76798b1605c77122a9"
 };

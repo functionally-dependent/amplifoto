@@ -1,6 +1,10 @@
 import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplify/datastore";
 
-
+export enum PostStatus {
+  ACTIVE = "ACTIVE",
+  INACTIVE = "INACTIVE",
+  SUSPENDED = "SUSPENDED"
+}
 
 
 
@@ -15,6 +19,7 @@ export declare class Post {
   readonly description: string;
   readonly image?: string | null;
   readonly owner?: string | null;
+  readonly status?: PostStatus | keyof typeof PostStatus | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Post, PostMetaData>);

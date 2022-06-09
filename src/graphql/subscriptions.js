@@ -10,6 +10,7 @@ export const onCreatePost = /* GraphQL */ `
       description
       image
       owner
+      status
       createdAt
       updatedAt
       _version
@@ -27,6 +28,7 @@ export const onUpdatePost = /* GraphQL */ `
       description
       image
       owner
+      status
       createdAt
       updatedAt
       _version
@@ -44,6 +46,7 @@ export const onDeletePost = /* GraphQL */ `
       description
       image
       owner
+      status
       createdAt
       updatedAt
       _version
