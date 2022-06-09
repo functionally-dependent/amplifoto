@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { API, Storage } from "aws-amplify";
 import { getPost } from "./graphql/queries";
 
-export default function Post() {
+export default function SinglePost() {
   const [loading, updateLoading] = useState(true);
   const [post, updatePost] = useState(null);
   const { id } = useParams();
