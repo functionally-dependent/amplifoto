@@ -12,7 +12,7 @@ import Header from "./Header";
 import CreatePost from "./CreatePost";
 import Button from "./Button";
 
-function App({ signOut }) {
+function App() {
   /* create a couple of pieces of initial state */
   const [showOverlay, updateOverlayVisibility] = useState(false);
   const [posts, updatePosts] = useState([]);
@@ -65,7 +65,6 @@ function App({ signOut }) {
             <Route exact path="/myposts" element={<Posts posts={myPosts} />} />
           </Routes>
         </div>
-        <button onClick={signOut}>Sign out</button>
       </HashRouter>
       {showOverlay && (
         <CreatePost
